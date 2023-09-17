@@ -1,0 +1,30 @@
+@api = http://localhost:3000/products
+
+GET {{api}}
+
+### crear productos
+
+POST {{api}}
+Content-Type:  application/json
+
+{
+    "nombre": "cajas",
+    "id_almacen":"2",
+    "descripción":"cajas",
+    "cantidad": "15"
+}
+
+### buscar producto por id
+
+GET {{api}}/15
+
+
+### eliminar producto por id
+
+DELETE {{api}}/borrar/8
+
+#### agregar
+PUT {{api}}/15/sumar/3
+
+#### agregar
+PUT {{api}}/15/restar/3
