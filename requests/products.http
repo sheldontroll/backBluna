@@ -1,4 +1,5 @@
 @api = http://localhost:3000/products
+@authApi = http://localhost:3000/auth
 
 GET {{api}}
 
@@ -28,3 +29,26 @@ PUT {{api}}/15/sumar/3
 
 #### agregar
 PUT {{api}}/15/restar/3
+
+
+### AUTH APIS
+### REGISTER
+POST {{authApi}}/register
+Content-Type: application/json
+
+{
+    "name": "test 2",
+    "email": "test2@test.com",
+    "password": "123",
+    "telf": "989230989",
+    "ruc": "777464646464"
+}
+
+### LOGIN
+POST {{authApi}}/login
+Content-Type: application/json
+
+{
+    "email": "test2@test.com",
+    "password": "123"
+}
