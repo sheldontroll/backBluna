@@ -1,7 +1,9 @@
 import { json, request, response } from "express";
-import { findUserByEmail, insertNewUser } from "../repositories/user.repository";
+import { findUserByEmail, getAllUsers, insertNewUser } from "../repositories/user.repository";
 import bcrypt from 'bcryptjs';
 import { genJWT } from "../helpers/jwt.helpet";
+import { getConnection } from "../database";
+import { queries } from "../database";
 
 export const registerUser = async (req = request, res = response) => {
     try {
@@ -114,12 +116,11 @@ export const loginUser = async (req = request, res = response) => {
 
 export const getUsers = async (req, res) => {
     try {
-        console.log('entrando');
-        const pool = await getConnection();
-        const result = await pool.request().query(queries.getAllUsers);
-        console.log(result);
+        const result = await getAllUsers();
 
-        res.json(result.recordset);
+        res.status(200)
+            .json(result.recordset);
+
     } catch (error) {
         res.status(500);
         res.send(error.message);

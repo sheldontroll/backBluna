@@ -30,3 +30,11 @@ export const insertNewUser = async ({
         .input('ruc', ruc)
         .query(queries.insertNewUser);
 }
+
+
+export const getAllUsers = async () => {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllUsers);
+
+    return result
+}

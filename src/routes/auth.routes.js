@@ -6,4 +6,4 @@ export const authRoutes = Router();
 
 authRoutes.post('/register', registerUser);
 authRoutes.post('/login', loginUser);
-authRoutes.get('/usuarios', (req,res) => { console.log(req) } );
+authRoutes.get('/usuarios', getUsers);
