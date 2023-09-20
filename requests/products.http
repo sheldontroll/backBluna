@@ -52,3 +52,6 @@ Content-Type: application/json
     "email": "test2@test.com",
     "password": "123"
 }
+
+### Get Users
+GET {{authApi}}/usuarios

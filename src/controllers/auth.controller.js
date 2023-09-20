@@ -111,3 +111,18 @@ export const loginUser = async (req = request, res = response) => {
 
 
 }
+
+export const getUsers = async (req, res) => {
+    try {
+        console.log('entrando');
+        const pool = await getConnection();
+        const result = await pool.request().query(queries.getAllUsers);
+        console.log(result);
+
+        res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+
+};

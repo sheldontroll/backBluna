@@ -6,5 +6,7 @@ export const queries = {
     sumarProduct: 'UPDATE inventario set cantidad = cantidad + @cantidad where id_inventario=@id_inventario',
     restarProduct: 'UPDATE inventario set cantidad = cantidad - @cantidad where id_inventario=@id_inventario',
     findUserByEmail: 'SELECT * FROM usuario WHERE correo=@email',
-    insertNewUser: 'INSERT INTO usuario (nombre, pass, ruc, correo, telf) VALUES (@name, @pass, @ruc, @email, @telf)'
+    insertNewUser: 'INSERT INTO usuario (nombre, pass, ruc, correo, telf) VALUES (@name, @pass, @ruc, @email, @telf)',
+    getAllUsers: 'SELECT * FROM USERS',
+
 }
