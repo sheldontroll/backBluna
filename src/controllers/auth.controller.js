@@ -119,7 +119,9 @@ export const getUsers = async (req, res) => {
         const result = await getAllUsers();
 
         res.status(200)
-            .json(result.recordset);
+            .json({
+                users: result.recordset
+            });
 
     } catch (error) {
         res.status(500);
