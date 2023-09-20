@@ -37,11 +37,11 @@ POST {{authApi}}/register
 Content-Type: application/json
 
 {
-    "name": "test 2",
-    "email": "test2@test.com",
+    "name": "test 4",
+    "email": "test4@test.com",
     "password": "123",
     "telf": "989230989",
-    "ruc": "777464646464"
+    "ruc": "987654312"
 }
 
 ### LOGIN
@@ -55,3 +55,6 @@ Content-Type: application/json
 
 ### Get Users
 GET {{authApi}}/usuarios
+
+### Get Usuario por id
+GET {{authApi}}/usuarios/777464646464

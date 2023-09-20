@@ -6,15 +6,15 @@ import { genJWT } from "../helpers/jwt.helpet";
 export const registerUser = async (req = request, res = response) => {
     try {
         const { email, ...rest } = req.body;
-        const queryResult = await findUserByEmail(email);
-
+        const {recordset} = await findUserByEmail(email);
+        const [data] = recordset;
         if (Object.values(req.body).includes("")) {
             return res.status(400), json({
                 msg: 'please complete the current form'
             })
         }
 
-        if (Object.values(queryResult.recordset[0]).length > 0) {
+        if (data) {
             return res.status(400).json({
                 msg: 'user already exists with this email'
             });
@@ -129,4 +129,17 @@ export const getUsers = async (req, res) => {
         res.send(error.message);
     }
 
+};
+
+export const getUserById = async (req, res) => {
+    console.log('entra');
+    const { ruc } = req.params;
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .input("ruc", ruc)
+        .query(queries.getUserById);
+
+    console.log(result);
+    res.send(result.recordset[0]);
 };
