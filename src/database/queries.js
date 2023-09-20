@@ -8,5 +8,6 @@ export const queries = {
     findUserByEmail: 'SELECT * FROM usuario WHERE correo=@email',
     insertNewUser: 'INSERT INTO usuario (nombre, pass, ruc, correo, telf) VALUES (@name, @pass, @ruc, @email, @telf)',
     getAllUsers: 'SELECT * FROM usuario',
+    getUserById: 'SELECT * FROM usuario WHERE ruc=@ruc'
 
 }

@@ -38,3 +38,15 @@ export const getAllUsers = async () => {
 
     return result
 }
+
+export const getUserById = async (req, res) => {
+    const { ruc } = req.params;
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .input("ruc", ruc)
+        .query(queries.getUserById);
+
+    console.log(result);
+    res.send(result.recordset[0]);
+};
