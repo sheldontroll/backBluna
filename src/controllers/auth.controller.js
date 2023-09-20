@@ -2,8 +2,6 @@ import { json, request, response } from "express";
 import { findUserByEmail, getAllUsers, insertNewUser } from "../repositories/user.repository";
 import bcrypt from 'bcryptjs';
 import { genJWT } from "../helpers/jwt.helpet";
-import { getConnection } from "../database";
-import { queries } from "../database";
 
 export const registerUser = async (req = request, res = response) => {
     try {
@@ -67,6 +65,7 @@ export const loginUser = async (req = request, res = response) => {
 
         if (Object.values(req.body).includes("")) {
             return res.status(400).json({
+                ok: false,
                 msg: 'please complete the current form'
             })
         }
@@ -74,18 +73,19 @@ export const loginUser = async (req = request, res = response) => {
         const { recordset } = await findUserByEmail(email);
         const [data] = recordset;
 
-        if (Object.values(data).length === 0) {
+        if (!data) {
             return res.status(400).json({
+                ok: false,
                 msg: 'invalid fields'
             })
         }
 
         // validando password
         const passwordMatch = bcrypt.compareSync(password, data.pass.trim());
-        console.log(passwordMatch)
 
         if (!passwordMatch) {
             return res.status(400).json({
+                ok: false,
                 msg: 'invalid fields'
             })
         }
@@ -105,6 +105,7 @@ export const loginUser = async (req = request, res = response) => {
             console.log(error);
 
             res.status(500).json({
+                ok: false,
                 msg: 'internal server error',
                 error: error.message
             })
