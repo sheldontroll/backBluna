@@ -2,6 +2,8 @@ import { json, request, response } from "express";
 import { findUserByEmail, getAllUsers, insertNewUser } from "../repositories/user.repository";
 import bcrypt from 'bcryptjs';
 import { genJWT } from "../helpers/jwt.helpet";
+import { getConnection } from "../database";
+import { queries } from "../database";
 
 export const registerUser = async (req = request, res = response) => {
     try {
