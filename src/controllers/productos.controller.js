@@ -17,23 +17,22 @@ export const getProducts = async (req, res) => {
 
 export const createNewProduct = async (req, res) => {
 
-    const { nombre, id_almacen, descripción, cantidad } = req.body
+    const { id_almacen, descripcion, cantidad } = req.body
 
-    if (nombre == null || id_almacen == null || descripción == null || cantidad == null) {
+    if (id_almacen == null || descripcion == null || cantidad == null) {
         return res.status(400).json({ msg: 'Formulario incompleto, llena todos los campos' })
     }
-
 
     try {
         const pool = await getConnection();
         await pool.request()
-            .input("nombre", sql.VarChar, nombre)
+            .input("nombre", sql.VarChar, descripcion)
             .input("id_almacen", sql.Int, id_almacen)
-            .input("descripción", sql.VarChar, descripción)
+            .input("descripción", sql.VarChar, descripcion)
             .input("cantidad", sql.Int, cantidad)
             .query(queries.addNewProduct)
 
-        res.json({ nombre, id_almacen, descripción, cantidad });
+        res.json({ id_almacen, descripcion, cantidad });
     } catch (error) {
         res.status(500);
         res.send(error.message);
